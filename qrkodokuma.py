@@ -10,22 +10,22 @@ res=cv2.imread("kaynaklar/indir.jpg")
 
 #res=cv2.resize(res,None,fx=2,fy=2)
 
-decetor=pyz.decode(res)
+decetor=pyz.decode(res) # resdeki görüntüyü tarar ve içerdiği barkodları çözer
 #print(decetor)
 
 for i in decetor:
-    info=i.data
+    data=i.data #burda qrkodun ıcındekı bilgileri hepsını değişkenlere atadık
     rect=i.rect
     pol=i.polygon
-    cv2.rectangle(res,(rect.left,rect.top),(rect.left+rect.width,rect.top+rect.height),(255,0,0,),3)
-    cv2.polylines(res,[np.array(pol)],True,(0,0,255),1)
+    cv2.rectangle(res,(rect.left,rect.top),(rect.left+rect.width,rect.top+rect.height),(255,0,0,),3) #burda qrkod etrafında dıkdortgen oluşturduk
+    cv2.polylines(res,[np.array(pol)],True,(0,0,255),1) #burda ıse qrkodun kenarlarını cızdırdık 
 cv2.imshow("qrkod",res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
 #+++++++++++++++++++++++++++++++++++++++++++++++++KAMERADAN QR KOD OKUMA +++++++++++++++++++++++++++++++++++++++++++
 
-cam=cv2.VideoCapture(0)
+cam=cv2.VideoCapture(0) #burda kameradan qrkod okumak ıcın Videocapture kullandık.0  varsayılan kamerayı  kullanılır.
 oku=[]
 with open("okuma.txt", "r") as file: #burada qrkod datasını olsuturudugumuz dosyayı okuyoruz
     for satir in file.readlines(): #Dosyanın satırlarını sırayla al
