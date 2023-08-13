@@ -61,7 +61,7 @@ while True:
                     girisyapanlarliste.append(data.decode())#qrkoddan alınan bu veriyi daha önce yazılanlar listesine ekle
                     songiris_zamani=time.time()#Algılama zamanını güncelle
 
-            if data.decode() not in oku: #eger okuma ıslemınde okunan qrkod txt dosyasında yoksa
+            else: #eger okuma ıslemınde okunan qrkod txt dosyasında yoksa
                 cv2.putText(frame, "BASARISIZ", (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
 
 
