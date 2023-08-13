@@ -51,10 +51,11 @@ while True:
             pol=i.polygon
             #print(data.decode())
             #cv2.putText(frame,data.decode(),(rect.left,rect.top),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
-            cv2.rectangle(frame,(rect.left,rect.top),(rect.left+rect.width,rect.top+rect.height),(168,178,215),2)
-            cv2.polylines(frame,[np.array(pol)],True,(255,0,0),2)
+           
             if data.decode() in oku and data not in girisyapanlarliste:
-                cv2.putText(frame, "BASARILI", (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+                renk=(0,255,0) #kod basarılı okunursa yeşil renk olsun
+                cikti="BASARILI" #kod basarılı sekılde okunursa bu yazıyı yazdıralım
+                #cv2.putText(frame, "BASARILI", (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
                 if time.time()-songiris_zamani>5: #Aynı QR kodu son 5 saniyede sadece bir kez yazdırmak ıcın
                     with open("gir.txt","a",encoding="utf8") as file:
                         file.write("{} kullanıcı , {} zaman aralıgında giris yapmıstır  \n".format(data.decode(),datetime.datetime.now()))
@@ -62,8 +63,12 @@ while True:
                     songiris_zamani=time.time()#Algılama zamanını güncelle
 
             else: #eger okuma ıslemınde okunan qrkod txt dosyasında yoksa
-                cv2.putText(frame, "BASARISIZ", (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
-
+                #cv2.putText(frame, "BASARISIZ", (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)   
+                renk=(0,0,255) #kod txt dosyasında yoksa  kırmızı renk yazı rengi olsun
+                cikti="BASARISIZ"
+            cv2.putText(frame, cikti, (rect.left, rect.top), cv2.FONT_HERSHEY_SIMPLEX, 0.75, renk, 2)
+            cv2.rectangle(frame,(rect.left,rect.top),(rect.left+rect.width,rect.top+rect.height),(168,178,215),2)
+            cv2.polylines(frame,[np.array(pol)],True,renk,2)
 
 
 
