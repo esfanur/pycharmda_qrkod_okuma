@@ -1,7 +1,7 @@
 import datetime
 import time
 import cv2
-import pyzbar.pyzbar  as pyz
+import pyzbar.pyzbar  as pyz # Bu kutuphane görüntülerde veya video akışlarında bulunan barkodları algılayabilir ve bu barkodları çözebilirsiniz
 import numpy as np
 import os
 """
